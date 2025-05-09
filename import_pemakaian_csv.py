@@ -1,8 +1,8 @@
 
 import pandas as pd
 from sqlalchemy.orm import Session
-from database import SessionLocal
-from models.pemakaian import Pemakaian
+from app.database import SessionLocal
+from app.models.pemakaian import Pemakaian
 
 def import_csv_to_pemakaian():
     db: Session = SessionLocal()
