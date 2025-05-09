@@ -12,6 +12,8 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 # Buat tabel
 user.Base.metadata.create_all(bind=engine)
 
+print("✅ FastAPI app is starting...")
+
 app = FastAPI(
     title="Dashboard Prediksi Obat dan Penyakit",
     version="1.0.0"
