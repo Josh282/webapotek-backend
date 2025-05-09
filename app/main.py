@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
-from schemas.database import engine
+from database import engine
 from models import user, obat, stock, penyakit, pemakaian
 from api.routes import auth, stock, pemakaian, forecast, upload
 
