@@ -1,0 +1,37 @@
+# Bytecode & cache
+__pycache__/
+*.py[cod]
+
+# SQLite DB file
+app.db
+*.db
+
+# Env files (jangan sampai bocor ke GitHub!)
+.env
+
+# Editor/IDE config
+.vscode/
+.idea/
+
+# MacOS
+.DS_Store
+
+# Jupyter & IPython
+*.ipynb_checkpoints
+.ipynb_checkpoints/
+
+# Python virtualenv (kalau pernah ada)
+venv/
+.env/
+.venv/
+
+# Node modules (kalau frontend pernah nyempil di situ)
+node_modules/
+
+# Dataset lokal
+*.csv
+dataset_*.csv
+
+# Testing/temp
+*.log
+test_results/
