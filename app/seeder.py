@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
-from app.database import SessionLocal
-from app.models.obat import Obat
-from app.models.penyakit import Penyakit
+from database import SessionLocal
+from models.obat import Obat
+from models.penyakit import Penyakit
 
 # List data awal
 obat_list = [
