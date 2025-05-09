@@ -2,8 +2,8 @@ from fastapi import APIRouter, UploadFile, File, Depends, HTTPException
 from sqlalchemy.orm import Session
 import pandas as pd
 import io
-from app.models.pemakaian import Pemakaian
-from app.api.dependencies import get_db
+from models.pemakaian import Pemakaian
+from api.dependencies import get_db
 
 router = APIRouter()
 

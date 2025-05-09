@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.models.penyakit import Penyakit
+from models.penyakit import Penyakit
 
 def get_all_penyakit(db: Session):
     return db.query(Penyakit).all()

@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from app.models.pemakaian import Pemakaian
-from app.schemas.pemakaian import PemakaianIn
+from models.pemakaian import Pemakaian
+from schemas.pemakaian import PemakaianIn
 
 def tambah_pemakaian(db: Session, data: PemakaianIn):
     entry = Pemakaian(**data.dict())

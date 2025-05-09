@@ -1,9 +1,9 @@
-from app.database import SessionLocal
+from database import SessionLocal
 from sqlalchemy.orm import Session
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
-from app.core.config import SECRET_KEY, ALGORITHM
+from core.config import SECRET_KEY, ALGORITHM
 
 def get_db():
     db = SessionLocal()

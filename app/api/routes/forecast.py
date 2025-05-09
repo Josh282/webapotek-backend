@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
-from app.api.dependencies import get_db
-from app.ml.predictor import predict_from_pemakaian
+from api.dependencies import get_db
+from ml.predictor import predict_from_pemakaian
 
 router = APIRouter()
 

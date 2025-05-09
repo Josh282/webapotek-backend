@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
-from app.api.dependencies import get_db
-from app.crud import stock as crud
-from app.schemas import stock as schema
+from api.dependencies import get_db
+from crud import stock as crud
+from schemas import stock as schema
 from sqlalchemy.orm import Session
 from typing import List
 

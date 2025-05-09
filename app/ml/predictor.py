@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import xgboost as xgb
 from datetime import datetime, timedelta
-from app.crud.pemakaian import get_all_pemakaian
+from crud.pemakaian import get_all_pemakaian
 
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "xgb_model_stok_obat.json")
 
