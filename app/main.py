@@ -5,6 +5,9 @@ from app.database import engine
 from app.models import user, obat, stock, penyakit, pemakaian
 from app.api.routes import auth, stock, pemakaian, forecast, upload
 
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # Buat tabel
 user.Base.metadata.create_all(bind=engine)
