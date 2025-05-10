@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, ForeignKey, Date
 from sqlalchemy.orm import relationship
-from database import Base
-from models.obat import Obat  # ✅ perbaikan di sini
+from app.database import Base
+from app.models.obat import Obat  # ✅ perbaikan di sini
 
 class Pemakaian(Base):
     __tablename__ = "pemakaian"
