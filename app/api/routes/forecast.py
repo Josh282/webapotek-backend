@@ -8,7 +8,7 @@ from app.core.security import verify_token  # ✅ Verifikasi JWT token
 router = APIRouter()
 security = HTTPBearer()
 
-@router.get("/")
+@router.get("")
 def get_forecast(
     horizon: int = Query(1, ge=1, le=12, description="Jumlah bulan ke depan untuk prediksi"),
     db: Session = Depends(get_db),
