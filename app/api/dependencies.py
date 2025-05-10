@@ -1,4 +1,4 @@
-from database import SessionLocal
+from app.database import SessionLocal
 from sqlalchemy.orm import Session
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
