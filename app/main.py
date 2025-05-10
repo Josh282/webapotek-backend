@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from app.database import engine
 from app.models import user, obat, stock, penyakit, pemakaian
-from app.api.routes import auth, stock, pemakaian, forecast, upload
+from app.api.routes import auth, stock, pemakaian, forecast, upload, debug
 
 # Buat tabel
 user.Base.metadata.create_all(bind=engine)
@@ -28,6 +28,7 @@ app.include_router(stock.router, prefix="/stok", tags=["Stok"])
 app.include_router(pemakaian.router, prefix="/pemakaian", tags=["Pemakaian"])
 app.include_router(forecast.router, prefix="/forecast", tags=["Forecast"])
 app.include_router(upload.router, prefix="/upload", tags=["Upload"])
+app.include_router(debug.router, prefix="/debug", tags=["Debug"])
 
 
 
