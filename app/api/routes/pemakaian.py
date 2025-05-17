@@ -19,11 +19,11 @@ def input_pemakaian(
 def get_pemakaian(db: Session = Depends(get_db)):
     return crud.get_all_pemakaian(db)
 
-@router.post("/manual")
+@router.post("/manual", response_model=schema.PemakaianRawOut)
 def input_pemakaian_manual(
     data: schema.PemakaianRawCreate,
     db: Session = Depends(get_db),
-    current_user: str = Depends(get_current_user)
+    current_user: str = Depends(get_current_user),  # ✅ validasi token
 ):
     return crud.tambah_pemakaian_raw(db, data)
 
