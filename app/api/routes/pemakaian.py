@@ -21,7 +21,7 @@ def get_pemakaian(db: Session = Depends(get_db)):
 
 @router.post("/manual")
 def input_pemakaian_manual(
-    data: schema.PemakaianRawIn,
+    data: schema.PemakaianRawCreate,
     db: Session = Depends(get_db),
     current_user: str = Depends(get_current_user)
 ):
