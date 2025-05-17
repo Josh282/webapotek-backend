@@ -11,3 +11,11 @@ class PemakaianOut(PemakaianIn):
 
     class Config:
         orm_mode = True
+
+class PemakaianRawCreate(BaseModel):
+    tanggal: date
+    nama_obat: str
+    penyakit: str
+    merk: str
+    jenis: str
+    volume: int
