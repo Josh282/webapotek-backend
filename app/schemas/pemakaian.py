@@ -15,7 +15,8 @@ class PemakaianOut(PemakaianIn):
 class PemakaianRawCreate(BaseModel):
     tanggal: date
     nama_obat: str
-    penyakit: str
-    merk: str
-    jenis: str
+    penyakit: Optional[str] = None
+    jenis: Optional[str] = None
+    merk: Optional[str] = None
+    pabrik: Optional[str] = None
     volume: int
