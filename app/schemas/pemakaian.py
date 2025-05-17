@@ -20,3 +20,9 @@ class PemakaianRawCreate(BaseModel):
     merk: Optional[str] = None
     pabrik: Optional[str] = None
     volume: int
+
+class PemakaianRawOut(PemakaianRawCreate):
+    id: int
+
+    class Config:
+        orm_mode = True
