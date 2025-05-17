@@ -29,7 +29,7 @@ app.include_router(pemakaian.router, prefix="/pemakaian", tags=["Pemakaian"])
 app.include_router(forecast.router, prefix="/forecast", tags=["Forecast"])
 app.include_router(upload.router, prefix="/upload", tags=["Upload"])
 app.include_router(debug.router, prefix="/debug", tags=["Debug"])
-app.include_router(pemakaian.router, prefix="/manual", tags=["Input Manual"])
+app.include_router(pemakaian.router, prefix="/pemakaian/manual", tags=["Input Manual"])
 
 
 
