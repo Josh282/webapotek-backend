@@ -18,3 +18,12 @@ def input_pemakaian(
 @router.get("/", response_model=List[schema.PemakaianOut])
 def get_pemakaian(db: Session = Depends(get_db)):
     return crud.get_all_pemakaian(db)
+
+@router.post("/manual")
+def input_pemakaian_manual(
+    data: schema.PemakaianRawIn,
+    db: Session = Depends(get_db)
+    current_user: str = Depends(get_current_user)
+):
+    return crud.tambah_pemakaian_raw(db, data)
+
