@@ -22,7 +22,7 @@ def get_pemakaian(db: Session = Depends(get_db)):
 @router.post("/manual")
 def input_pemakaian_manual(
     data: schema.PemakaianRawIn,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
     current_user: str = Depends(get_current_user)
 ):
     return crud.tambah_pemakaian_raw(db, data)
