@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from datetime import date
+from typing import Optional
 
 class PemakaianIn(BaseModel):
     obat_id: int
