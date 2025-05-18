@@ -39,4 +39,11 @@ def aggregate_pemakaian(
     inserted = crud.aggregate_pemakaian_raw(db, start_date, end_date)
     return {"message": "Agregasi selesai", "rows_inserted": inserted}
 
+@router.get("/top15")
+def top15_pemakaian(
+    db: Session = Depends(get_db),
+    current_user: str = Depends(get_current_user)
+):
+    return crud.get_top15_pemakaian_raw(db)
+
 
