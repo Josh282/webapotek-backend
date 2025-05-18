@@ -46,3 +46,20 @@ def aggregate_pemakaian_raw(db: Session, start_date: date, end_date: date):
 
     db.commit()
     return inserted
+
+def get_top15_pemakaian_raw(db: Session):
+    from sqlalchemy import func
+    from app.models.pemakaian_raw import PemakaianRaw
+
+    result = (
+        db.query(
+            PemakaianRaw.nama_obat,
+            func.sum(PemakaianRaw.volume).label("total_volume")
+        )
+        .group_by(PemakaianRaw.nama_obat)
+        .order_by(func.sum(PemakaianRaw.volume).desc())
+        .limit(15)
+        .all()
+    )
+
+    return [{"obat": r.nama_obat, "jumlah": int(r.total_volume)} for r in result]
