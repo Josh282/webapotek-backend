@@ -1,9 +1,11 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from app.api.dependencies import get_db, get_current_user
 from app.crud import pemakaian as crud
 from app.schemas import pemakaian as schema
 from typing import List
+from datetime import date
+
 
 router = APIRouter()
 
@@ -26,4 +28,15 @@ def input_pemakaian_manual(
     current_user: str = Depends(get_current_user),  # ✅ validasi token
 ):
     return crud.tambah_pemakaian_raw(db, data)
+
+@router.post("/aggregate")
+def aggregate_pemakaian(
+    start_date: date = Query(..., description="Tanggal mulai (YYYY-MM-DD)"),
+    end_date: date = Query(..., description="Tanggal akhir (YYYY-MM-DD)"),
+    db: Session = Depends(get_db),
+    current_user: str = Depends(get_current_user),  # ✅ validasi token
+):
+    inserted = crud.aggregate_pemakaian_raw(db, start_date, end_date)
+    return {"message": "Agregasi selesai", "rows_inserted": inserted}
+
 
