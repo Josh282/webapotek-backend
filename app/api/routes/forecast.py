@@ -12,11 +12,13 @@ security = HTTPBearer()
 def get_forecast(
     horizon: int = Query(1, ge=1, le=12, description="Jumlah bulan ke depan untuk prediksi"),
     db: Session = Depends(get_db),
-    credentials: HTTPAuthorizationCredentials = Security(security),  # ✅ Ambil token dari header
+    credentials: HTTPAuthorizationCredentials = Security(security),
 ):
-    verify_token(credentials.credentials)  # ✅ Verifikasi token sebelum melanjutkan
+    verify_token(credentials.credentials)
     try:
         hasil = predict_from_pemakaian(db, horizon=horizon)
-        return {"forecast": hasil}
+        top15 = sorted(hasil, key=lambda x: x["jumlah"], reverse=True)[:15]
+        return {"forecast": top15}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Forecast failed: {str(e)}")
+
