@@ -30,7 +30,7 @@ def predict_from_pemakaian(db, horizon=1):
     } for r in records])
 
     # Ubah ke datetime
-    df["bulan"] = pd.to_datetime(df["bulan"] + "-01")
+    df["bulan"] = pd.to_datetime(df["bulan"])
     now = datetime.today().replace(day=1)
 
     all_forecasts = []
