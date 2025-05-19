@@ -9,4 +9,5 @@ xgboost==1.7.6
 python-multipart==0.0.6
 python-jose[cryptography]
 passlib[bcrypt]
+openpyxl
 
