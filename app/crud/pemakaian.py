@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import extract, func
-from datetime import date
+from datetime import date, datetime
 from app.models.pemakaian import Pemakaian
 from app.schemas.pemakaian import PemakaianIn, PemakaianRawCreate
 from app.models.pemakaian_raw import PemakaianRaw
@@ -36,9 +36,24 @@ def aggregate_pemakaian_raw(db: Session, start_date: date, end_date: date):
 
     inserted = 0
     for row in data:
+        try:
+            bulan_date = datetime.strptime(row.bulan + "-01", "%Y-%m-%d").date()
+        except Exception as e:
+            print("❌ Gagal konversi bulan:", row.bulan, "→", e)
+            continue
+
+        # ❗️Cek apakah record sudah ada
+        existing = (
+            db.query(Pemakaian)
+            .filter(Pemakaian.namaobat == row.nama_obat, Pemakaian.bulan == bulan_date)
+            .first()
+        )
+        if existing:
+            continue  # Skip duplikat
+
         new_record = Pemakaian(
             namaobat=row.nama_obat,
-            bulan=row.bulan + "-01",
+            bulan=bulan_date,
             jumlah=row.jumlah
         )
         db.add(new_record)
@@ -46,6 +61,7 @@ def aggregate_pemakaian_raw(db: Session, start_date: date, end_date: date):
 
     db.commit()
     return inserted
+
 
 def get_top15_pemakaian_raw(db: Session):
     from sqlalchemy import func
