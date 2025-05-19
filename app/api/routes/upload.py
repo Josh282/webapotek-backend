@@ -13,7 +13,7 @@ async def upload_file(file: UploadFile = File(...), db: Session = Depends(get_db
         contents = await file.read()
         filename = file.filename.lower()
 
-        # Baca file sebagai excel atau csv
+        # Baca file sebagai Excel atau CSV
         if filename.endswith(".xlsx"):
             df = pd.read_excel(io.BytesIO(contents))
         elif filename.endswith(".csv"):
@@ -22,7 +22,7 @@ async def upload_file(file: UploadFile = File(...), db: Session = Depends(get_db
         else:
             raise HTTPException(status_code=400, detail="File harus .csv atau .xlsx")
 
-        # Rename kolom agar match dengan field database
+        # Rename kolom agar sesuai dengan field database
         df.rename(columns={
             "tgl_resep": "tanggal",
             "namaobat": "nama_obat",
@@ -30,12 +30,19 @@ async def upload_file(file: UploadFile = File(...), db: Session = Depends(get_db
             "pabrikan": "pabrik"
         }, inplace=True)
 
-        # Validasi kolom wajib
-        required_cols = {"tanggal", "nama_obat", "penyakit", "merk", "jenis", "pabrik", "volume"}
-        if not required_cols.issubset(set(df.columns)):
-            raise HTTPException(status_code=400, detail=f"File harus mengandung kolom: {', '.join(required_cols)}")
+        # Ambil hanya kolom yang dibutuhkan
+        required_cols = ["tanggal", "nama_obat", "penyakit", "merk", "jenis", "pabrik", "volume"]
+        df = df.loc[:, df.columns.intersection(required_cols)]
 
-        # Pastikan format tanggal benar
+        # Validasi apakah semua kolom ada
+        if set(required_cols) - set(df.columns):
+            missing = set(required_cols) - set(df.columns)
+            raise HTTPException(
+                status_code=400,
+                detail=f"File tidak lengkap, kolom kurang: {', '.join(missing)}"
+            )
+
+        # Pastikan format tanggal valid
         df["tanggal"] = pd.to_datetime(df["tanggal"]).dt.date
 
         # Simpan ke database
