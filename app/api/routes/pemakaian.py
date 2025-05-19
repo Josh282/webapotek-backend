@@ -46,4 +46,11 @@ def top15_pemakaian(
 ):
     return crud.get_top15_pemakaian_raw(db)
 
+@router.get("/top5-penyakit")
+def top5_penyakit_bulan_ini(
+    db: Session = Depends(get_db),
+    current_user: str = Depends(get_current_user)
+):
+    return crud.get_top5_penyakit_bulan_ini(db)
+
 
