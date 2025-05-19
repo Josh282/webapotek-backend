@@ -18,7 +18,7 @@ def get_forecast(
     try:
         hasil = predict_from_pemakaian(db, horizon=horizon)
         top15 = sorted(hasil, key=lambda x: x["jumlah"], reverse=True)[:15]
-        return {"forecast": top15}
+        return {"forecast": hasil}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Forecast failed: {str(e)}")
 
