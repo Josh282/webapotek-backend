@@ -9,5 +9,6 @@ class PemakaianRaw(Base):
     nama_obat = Column(String, index=True)
     penyakit = Column(String)
     merk = Column(String)
+    pabrik=Column(String)
     jenis = Column(String)  # Tablet, Kapsul, dll
     volume = Column(Integer)
