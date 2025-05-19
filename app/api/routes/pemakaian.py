@@ -27,7 +27,7 @@ def input_pemakaian_manual(
     db: Session = Depends(get_db),
     current_user: str = Depends(get_current_user),  # ✅ validasi token
 ):
-    return crud.tambah_pemakaian_raw(db, data)
+    return crud.create_raw(db, data)
 
 @router.post("/aggregate")
 def aggregate_pemakaian(
